@@ -144,7 +144,7 @@ function interpretFile() {
 
     ////error check the line of data
     //if the line is empty(contains only commas and a possibly newline character), reached EoF, so exit.
-    if (line.toString().match(filledLineRegex).length <= 1) { break A; }
+    if (line.toString() == "" || line.toString().match(filledLineRegex).length <= 1) { break A; }
     //if missing an HP value, inform the user
     if (line[2] === "" || line[2].match(numberRegex).length === -1) {
       showError("HP value at line " + (i+1) + " is either empty or contains non-numerical\ncharacters. Please fix the issue and try again.");
@@ -426,6 +426,7 @@ var HTMLGenn = function () {
       total += thumbs[i].getHp();
       result = result + singleThumb(block, thumbs[i]);
     }
+    result = result.replace("$subtierTotal", total); //ensures subtotal appears if there was only one activity in the tier
     return result;
   }
 
